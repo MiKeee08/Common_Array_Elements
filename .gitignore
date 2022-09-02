@@ -1,19 +1,110 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
-class WordCount
+class LAB6
 {
 	public static void main(String args[])
 	{	
-		int count = 0;
 		Scanner scr = new Scanner(System.in);
-		System.out.print("Enter a string: ");
-		String str = scr.nextLine();
-		
-		for(int i = 0; i < str.length(); i++)
+		System.out.print("Enter length of first array: ");
+		int length_1 = scr.nextInt();
+		int[] arr_1 = new int[length_1];
+
+		for(int i = 0; i < length_1; i++)
 		{
-			if(str.charAt(i) == ' ')
-			count = count + 1;
+			System.out.print("Enter a number:");
+			arr_1[i] = scr.nextInt();
 		}
-		System.out.println(count + 1);	
+
+		System.out.println("");
+		
+		System.out.print("Enter length of second array: ");
+		int length_2 = scr.nextInt();
+		int[] arr_2 = new int[length_2];
+		
+		for(int i = 0; i < length_2; i++)
+		{
+			System.out.print("Enter a number:");
+			arr_2[i] = scr.nextInt();
+		}
+
+		System.out.println("");
+		functions f = new functions();
+
+		int common_length = f.common_length(arr_1, arr_2);
+		int[] common_array = new int[common_length];
+		common_array = f.common_array(arr_1, arr_2);
+		
+		System.out.println("");
+		System.out.println("The common elements are: -");	
+		f.dist_array(common_array);
+	}
+}	
+
+class functions
+{
+	int count = 0;
+	public int common_length(int[] arr_1, int[] arr_2)
+	{
+		for (int i = 0; i < arr_1.length; i++)
+		{
+			for(int j = 0; j < arr_2.length; j++)
+			{
+				if(arr_1[i] == arr_2[j])
+				{
+					count = count + 1;
+				}
+			}
+		}
+		return (count);
+	}
+
+	public int[] common_array(int[] arr_1,int[] arr_2)
+	{
+		int k = 0;
+		int[] common_array = new int[count];
+		for (int i = 0; i < arr_1.length; i++)
+		{
+			for(int j = 0; j < arr_2.length; j++)
+			{
+				if(arr_1[i] == arr_2[j])
+				{
+					common_array[k] = arr_1[i];
+					k = k + 1;
+				}
+			}
+		}
+		return(common_array);
+	}
+
+	public void dist_array(int[] common_array)
+	{
+		int index = 0;
+		int[] distinctArray = new int[count];		
+
+		for (int i = 0; i < common_array.length; i++)   
+       		{   
+            		int flag = 0;  
+            		for (int j = 0; j < i; j++)
+			{  
+                		if (common_array[i] == common_array[j])
+				{   
+                    			flag = 1;  
+                    			break;   
+                		}
+			}    
+            			if (flag == 0)
+				{   
+                			distinctArray[index] = common_array[i];  
+                			index++;
+            			}  
+        	}  
+
+		
+
+		for(int i = 0; i < index; i++)
+		{
+			System.out.println(distinctArray[i]);
+		}   
 	}
 }
